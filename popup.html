@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Excalidraw Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./tailwind.js"></script>
+    <style>
+        /* Custom styles to supplement Tailwind */
+        .w-140 {
+            width: 35rem;
+        }
+
+        .w-120 {
+            width: 30rem;
+        }
+
+        .dark-theme {
+            background-color: #0f0a19;
+            color: #f0f0f0;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(to right, #8b5cf6, #6d28d9);
+        }
+
+        .gradient-btn:hover {
+            background: linear-gradient(to right, #7c3aed, #5b21b6);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .gradient-header {
+            background: linear-gradient(to right, #6d28d9, #4c1d95);
+        }
+
+        .card-dark {
+            background-color: #170f29;
+            border: 1px solid #2d1f47;
+        }
+
+        .input-dark {
+            background-color: #1f1235;
+            border-color: #4a2b7d;
+            color: #f0f0f0;
+        }
+
+        .input-dark:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+        }
+
+        .card-item {
+            background-color: #1a0f2a;
+            border: 1px solid #331b59;
+            transition: all 0.3s ease;
+        }
+
+        .card-item:hover {
+            border-color: #5b21b6;
+            box-shadow: 0 4px 12px rgba(91, 33, 182, 0.3);
+        }
+
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1f1235;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4a2b7d;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6d28d9;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+            }
+        }
+
+        .shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(30deg);
+            }
+
+            100% {
+                transform: translateX(100%) rotate(30deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-theme font-sans bg-gradient-to-br from-purple-900/20 to-purple-950/20">
+    <div class="w-140 mx-auto card-dark rounded-xl shadow-2xl overflow-hidden my-4 fade-in border border-purple-900/30">
+        <div class="gradient-header py-5 px-6">
+            <h1 class="text-white text-2xl font-bold flex items-center">
+                <svg class="w-7 h-7 mr-3 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                    </path>
+                </svg>
+                Excalidraw Tracker
+            </h1>
+            <p class="text-purple-200 text-sm mt-1">Track and organize your Excalidraw diagrams</p>
+        </div>
+        <div class="p-6">
+            <div class="bg-purple-900/20 rounded-lg p-4 mb-6 border border-purple-800/50 backdrop-blur-sm">
+                <p class="text-purple-100">
+                    Click the button below to save the current Excalidraw share URL.
+                    <span class="text-purple-300 font-medium">(Make sure you're on an Excalidraw page!)</span>
+                </p>
+                <button id="saveButton"
+                    class="w-full gradient-btn text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center mt-4 shadow-lg shine">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
+                        </path>
+                    </svg>
+                    Save Current URL
+                </button>
+            </div>
+            <div id="titleInputContainer"
+                class="mb-4 hidden bg-purple-950/50 p-4 rounded-lg border border-purple-800/30 fade-in">
+                <label for="urlTitle" class="block text-sm font-medium text-purple-200 mb-2">Title for this
+                    diagram:</label>
+                <div class="flex items-center">
+                    <input type="text" id="urlTitle"
+                        class="input-dark flex-grow rounded-lg py-2 px-3 focus:outline-none"
+                        placeholder="Enter a descriptive title">
+                    <button id="confirmSaveBtn"
+                        class="gradient-btn ml-2 text-white px-4 py-2 rounded-lg hover:shadow-purple-500/50 hover:shadow-md">
+                        Save
+                    </button>
+                    <button id="cancelSaveBtn"
+                        class="bg-gray-800 hover:bg-gray-700 text-white ml-2 px-3 py-2 rounded-lg transition-colors duration-200">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+
+            <div id="message"
+                class="mt-3 text-center text-sm font-medium text-purple-400 h-6 flex items-center justify-center"></div>
+
+            <div class="mt-6">
+                <div class="flex justify-between items-center border-b border-purple-900/50 pb-2 mb-4">
+                    <h2 class="text-lg font-semibold text-purple-100 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                        </svg>
+                        Saved URLs
+                    </h2>
+                    <span id="urlCount"
+                        class="px-2 py-1 bg-purple-900 text-purple-100 text-xs font-medium rounded-full shadow-inner shadow-purple-800/50">0</span>
+                </div>
+                <div
+                    class="overflow-y-auto max-h-80 pr-1 scrollbar-thin scrollbar-thumb-purple-700 scrollbar-track-purple-900">
+                    <ul id="linkList" class="space-y-3"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

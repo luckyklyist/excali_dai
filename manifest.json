@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Excalidraw Link Tracker",
+  "version": "1.0",
+  "description": "Capture and track Excalidraw share URLs with a click of a button.",
+  "permissions": ["activeTab", "storage", "clipboardWrite", "scripting"],
+  "host_permissions": ["https://excalidraw.com/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Excalidraw Tracker"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["tailwind.min.css"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "icons": {
+    "128": "excali_dai.jpeg"
+  }
+}
