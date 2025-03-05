@@ -1,4 +1,4 @@
-# Excali Dai
+# Excali Dai - Built by Junu & Munu
 
 A Chrome extension that helps you save, organize, and manage your Excali diagram links.
 

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Excalidraw Tracker</title>
+    <title>Excali Dai</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="./tailwind.js"></script>
     <style>
@@ -120,13 +120,16 @@
         }
 
         .shine::after {
-            content: '';
+            content: "";
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+            background: linear-gradient(to right,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    rgba(255, 255, 255, 0) 100%);
             transform: rotate(30deg);
             animation: shine 3s infinite;
         }
@@ -145,6 +148,7 @@
 
 <body class="dark-theme font-sans bg-gradient-to-br from-blue-900/20 to-blue-950/20">
     <div class="w-140 mx-auto card-dark rounded-xl shadow-2xl overflow-hidden my-4 fade-in border border-blue-900/30">
+        <!-- Header -->
         <div class="gradient-header py-5 px-6">
             <h1 class="text-white text-2xl font-bold flex items-center">
                 <svg class="w-7 h-7 mr-3 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -153,10 +157,13 @@
                         d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
                     </path>
                 </svg>
-                Excalidraw Tracker
+                Excali Dai
             </h1>
-            <p class="text-blue-200 text-sm mt-1">Track and organize your Excalidraw diagrams</p>
+            <p class="text-blue-200 text-sm mt-1">
+                Track and organize your Excalidraw diagrams
+            </p>
         </div>
+        <!-- Main Content -->
         <div class="p-6">
             <div class="bg-blue-900/20 rounded-lg p-4 mb-6 border border-blue-800/50 backdrop-blur-sm">
                 <p class="text-blue-100">
@@ -174,14 +181,15 @@
                     Save Current URL
                 </button>
             </div>
+            <!-- Title & Folder Input Container -->
             <div id="titleInputContainer"
                 class="mb-4 hidden bg-blue-950/50 p-4 rounded-lg border border-blue-800/30 fade-in">
                 <label for="urlTitle" class="block text-sm font-medium text-blue-200 mb-2">Title for this
                     diagram:</label>
-                <div class="flex items-center">
+                <div class="flex items-center mb-4">
                     <input type="text" id="urlTitle"
                         class="input-dark flex-grow rounded-lg py-2 px-3 focus:outline-none"
-                        placeholder="Enter a descriptive title">
+                        placeholder="Enter a descriptive title" />
                     <button id="confirmSaveBtn"
                         class="gradient-btn ml-2 text-white px-4 py-2 rounded-lg hover:shadow-blue-500/50 hover:shadow-md">
                         Save
@@ -191,11 +199,27 @@
                         Cancel
                     </button>
                 </div>
+                <label for="folderSelect" class="block text-sm font-medium text-blue-200 mb-2">Select Folder:</label>
+                <div class="flex items-center">
+                    <select id="folderSelect" class="input-dark flex-grow rounded-lg py-2 px-3 focus:outline-none">
+                        <option value="">-- Choose Folder --</option>
+                        <option value="new">+ Create New Folder</option>
+                    </select>
+                </div>
+                <div id="newFolderContainer" class="mt-4 hidden">
+                    <label for="newFolderInput" class="block text-sm font-medium text-blue-200 mb-2">New Folder
+                        Name:</label>
+                    <input type="text" id="newFolderInput"
+                        class="input-dark w-full rounded-lg py-2 px-3 focus:outline-none"
+                        placeholder="Enter folder name" />
+                </div>
             </div>
 
+            <!-- Message Area -->
             <div id="message"
                 class="mt-3 text-center text-sm font-medium text-blue-400 h-6 flex items-center justify-center"></div>
 
+            <!-- Saved URLs Header & Folder Filter -->
             <div class="mt-6">
                 <div class="flex justify-between items-center border-b border-blue-900/50 pb-2 mb-4">
                     <h2 class="text-lg font-semibold text-blue-100 flex items-center">
@@ -206,9 +230,15 @@
                         </svg>
                         Saved URLs
                     </h2>
-                    <span id="urlCount"
-                        class="px-2 py-1 bg-blue-900 text-blue-100 text-xs font-medium rounded-full shadow-inner shadow-blue-800/50">0</span>
+                    <div class="flex items-center space-x-4">
+                        <select id="folderFilter" class="input-dark rounded py-1 px-2 text-sm">
+                            <option value="all">All Folders</option>
+                        </select>
+                        <span id="urlCount"
+                            class="px-2 py-1 bg-blue-900 text-blue-100 text-xs font-medium rounded-full shadow-inner shadow-blue-800/50">0</span>
+                    </div>
                 </div>
+                <!-- Saved URLs List -->
                 <div
                     class="overflow-y-auto max-h-80 pr-1 scrollbar-thin scrollbar-thumb-blue-700 scrollbar-track-blue-900">
                     <ul id="linkList" class="space-y-3"></ul>
@@ -216,7 +246,8 @@
             </div>
         </div>
     </div>
-    <script src="popup.js"></script>
+    <!-- JavaScript Section -->
+    <script src="./popup.js"></script>
 </body>
 
 </html>
